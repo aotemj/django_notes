@@ -31,3 +31,8 @@
   python manage.py runserver 127.0.0.1:8002 
 ```
 
+## create app
+
+```bash
+    python manage.py startapp appName
+```

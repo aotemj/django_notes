@@ -15,7 +15,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from firstApp import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path("first_request/", views.my_first_request)
 ]
