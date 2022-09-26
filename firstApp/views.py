@@ -16,3 +16,7 @@ def login(request):
 
 def get_setting_config(request):
     return HttpResponse(f"当前值为获取 settings 中的 DEBUG 值：${settings.DEBUG}")
+
+
+def first_app_login(request):
+    return HttpResponse("This is a example that import urls from the app")

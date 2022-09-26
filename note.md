@@ -14,6 +14,7 @@
 ```
 
 # Project Manage
+
 ## create project:
 
 ```bash
@@ -35,4 +36,46 @@
 
 ```bash
     python manage.py startapp appName
+```
+
+## import all the app urls by using keyword "include"
+
+```python
+# step1 create urls.py in the app
+# firstApp/urls.py
+from firstApp import views
+from django.urls import path
+
+urlpatterns = [
+    path("login/", views.first_app_login)
+]
+
+# step2 add firstApp to the project settings
+# django_project01/settings.py
+...
+# Application definition
+
+INSTALLED_APPS = [
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'firstApp'  # add firstApp to the project
+]
+...
+# step3 import the firstApp urls to the project urls
+# django_project01/urls.py
+from django.contrib import admin
+from django.urls import path, include
+from firstApp import views
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path("first_request/", views.my_first_request),
+    path("login/", views.login),
+    path("get_settings_config/", views.get_setting_config),
+    path("first_app/", include("firstApp.urls"))  # import all app urls with keyword "include"
+]
 ```
