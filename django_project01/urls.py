@@ -19,5 +19,7 @@ from firstApp import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path("first_request/", views.my_first_request)
+    path("first_request/", views.my_first_request),
+    path("login/", views.login),
+    path("get_settings_config/", views.get_setting_config)
 ]
