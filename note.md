@@ -78,4 +78,8 @@ urlpatterns = [
     path("get_settings_config/", views.get_setting_config),
     path("first_app/", include("firstApp.urls"))  # import all app urls with keyword "include"
 ]
+# step4 visit the app url by using browser, notice that the app name should be added to the front url
+# visit app url: http://localhost:8000/first_app/login/ 
+# visit project url: http://localhost:8000/login/ 
+
 ```
