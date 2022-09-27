@@ -83,3 +83,56 @@ urlpatterns = [
 # visit project url: http://localhost:8000/login/ 
 
 ```
+
+### generate a uuid
+
+```python
+import uuid
+
+print(uuid.uuid1())
+```
+
+### custom converter
+
+```python
+# step1 create a converter file to define the custom converter
+# firstApp/converter.py
+class MyYearConverter(object):
+    regex = '[0-9]{4}'
+
+    def to_python(self, value):
+        return int(value)
+
+    def to_url(self, value):
+        return '%04d' % value
+
+
+# step2 register the custom converter in the urls.py
+# firstApp/urls.py
+from django.urls import path, register_converter
+from . import conventers
+
+# register custom converter
+# "yyyy" is the sign of the custom converter 
+register_converter(conventers.MyYearConverter, 'yyyy')
+
+# step3 then define the urlpatterns 
+# firstApp/urls.py
+#     use the custom converter
+from firstApp import views
+
+urlpatterns = [
+    # ...
+    #  the sign yyyy should be equals with the custom converter definition
+    path("<yyyy:year>", views.custom_year_converter)
+    #     ...
+]
+
+# step3 then define the views 
+# firstApp/views.py
+from django.http import HttpResponse
+
+
+def custom_year_converter(request, year):
+    return HttpResponse(f"This is a example of the custom converter, the year is:{year}")
+```

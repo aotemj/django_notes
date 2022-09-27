@@ -39,3 +39,19 @@ def article_section(request, article_id, section_name):
 def article_search(request, slug_parameter):
     return HttpResponse(
         f"This is a example of the slug parameter, a slug parameter means the parameter contains 'number' 、'word'、'-' 、'_',and the slug parameter is : {slug_parameter}")
+
+
+def article_path(request, path):
+    return HttpResponse(f"This is a example of the path type, the path is: {path}")
+
+
+def article_str(request, str):
+    return HttpResponse(f"This is a example of the str type, the str is: {str}")
+
+
+def article_uuid(request, uuid):
+    return HttpResponse(f"This is a example of the uuid, the uuid is:{uuid}")
+
+
+def custom_year_converter(request, year):
+    return HttpResponse(f"This is a example of the custom converter, the year is:{year}")
