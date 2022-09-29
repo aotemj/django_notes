@@ -27,5 +27,7 @@ urlpatterns = [
             views.article_regexp_year_month_slug),
     #     path with the default paramster
     path("blog", views.blog),
-    path("blog/<int:num>", views.blog)
+    path("blog/<int:num>", views.blog),
+    #     error handler
+    #     404
 ]

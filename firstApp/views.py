@@ -63,3 +63,7 @@ def article_regexp_year_month_slug(request, year, month, slug):
 
 def blog(request, num=1):
     return HttpResponse(f"This is an example of the default paramster, the default num is :{num}")
+
+
+def page_not_found(request, exception):
+    return HttpResponse(exception)

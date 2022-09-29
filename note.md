@@ -135,4 +135,31 @@ from django.http import HttpResponse
 
 def custom_year_converter(request, year):
     return HttpResponse(f"This is a example of the custom converter, the year is:{year}")
+
+```
+
+### error handler
+
+```python
+# step1 modify the project settings.py
+# django_project01/settings.py
+
+debug: False
+
+ALLOWED_HOSTS = ["*"]
+
+# step2 create a page_not_found handler in the app views.py
+# firstApp/views.py
+from django.http import HttpResponse
+
+
+def page_not_found(request, exception):
+    return HttpResponse(exception)
+
+
+# step3 import the handler in the project urls.py
+from firstApp import views
+
+handler404 = 'firstApp.views.page_not_found'
+
 ```

@@ -17,6 +17,8 @@ from django.contrib import admin
 from django.urls import path, include
 from firstApp import views
 
+handler404 = 'firstApp.views.page_not_found'
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("first_request/", views.my_first_request),
