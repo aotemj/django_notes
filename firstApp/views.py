@@ -58,4 +58,8 @@ def custom_year_converter(request, year):
 
 
 def article_regexp_year_month_slug(request, year, month, slug):
-    return HttpResponse(f"This is an example the year is :{year} month: {month}, slug: {slug}")
+    return HttpResponse(f"This is an example of the year is :{year} month: {month}, slug: {slug}")
+
+
+def blog(request, num=1):
+    return HttpResponse(f"This is an example of the default paramster, the default num is :{num}")

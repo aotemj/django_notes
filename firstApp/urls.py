@@ -24,5 +24,8 @@ urlpatterns = [
     # path("<yyyy:year>", views.custom_year_converter),
     #     regexp path
     re_path(r'^articles/(?P<year>[0-9]{4})/(?P<month>[0-9]{2})/(?P<slug>[\w-]+)/$',
-            views.article_regexp_year_month_slug)
+            views.article_regexp_year_month_slug),
+    #     path with the default paramster
+    path("blog", views.blog),
+    path("blog/<int:num>", views.blog)
 ]
