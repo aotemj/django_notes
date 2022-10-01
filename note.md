@@ -186,3 +186,37 @@ urlpatterns = [
     path('', include(submodule_patterns))
 ]
 ```
+
+* method 2 combine the urlpatterns which has the same prefix
+
+```python
+from firstApp import views
+from django.urls import path, register_converter, re_path, include
+
+#  before divide
+path("article/", views.article_list),
+# dynamic parameter
+path("article/<int:article_id>/", views.article),
+# multiple dynamic parameter
+path("article/<int:article_id>/<str:section_name>/", views.article_section),
+# slug type: word、number and _ -
+path("article/<slug:slug_parameter>/", views.article_search),
+# path type: include /
+path("article/path/<path:path>/", views.article_path),
+# str type: not include /
+path("article/<str:str>/", views.article_str),
+# uuid type
+path("article/<uuid:uuid>", views.article_uuid),
+
+#  after divide:
+
+path('article/', include([
+    path("", views.article_list),
+    path("<int:article_id>/", views.article),
+    path("<int:article_id>/<str:section_name>/", views.article_section),
+    path("<slug:slug_parameter>/", views.article_search),
+    path("path/<path:path>/", views.article_path),
+    path("<str:str>/", views.article_str),
+    path("<uuid:uuid>", views.article_uuid),
+]))
+```
