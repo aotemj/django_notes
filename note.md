@@ -163,3 +163,26 @@ from firstApp import views
 handler404 = 'firstApp.views.page_not_found'
 
 ```
+
+### divide urlpatterns into many small modules
+
+* method 1
+
+```python
+#   step 1: generate a sub urlpatterns :
+#   firstApp/urls.py
+from firstApp import views
+from django.urls import path, include
+
+submodule_patterns = [
+    path("blog", views.blog),
+    path("blog/<int:num>", views.blog),
+]
+#   step 2:
+#   include submodule_patterns into the urlpatterns:
+
+urlpatterns = [
+    # ... other patterns
+    path('', include(submodule_patterns))
+]
+```

@@ -1,9 +1,14 @@
 from firstApp import views
-from django.urls import path, register_converter, re_path
+from django.urls import path, register_converter, re_path, include
 from . import conventers
 
 # register custom converter
 register_converter(conventers.MyYearConverter, 'yyyy')
+
+submodule_patterns = [
+    path("blog", views.blog),
+    path("blog/<int:num>", views.blog),
+]
 
 urlpatterns = [
     # path("login/", views.first_app_login),
@@ -26,8 +31,9 @@ urlpatterns = [
     re_path(r'^articles/(?P<year>[0-9]{4})/(?P<month>[0-9]{2})/(?P<slug>[\w-]+)/$',
             views.article_regexp_year_month_slug),
     #     path with the default paramster
-    path("blog", views.blog),
-    path("blog/<int:num>", views.blog),
+
     #     error handler
     #     404
+    #
+    path('', include(submodule_patterns)),
 ]
