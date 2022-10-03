@@ -24,5 +24,6 @@ urlpatterns = [
     path("first_request/", views.my_first_request),
     path("login/", views.login),
     path("get_settings_config/", views.get_setting_config),
-    path("first_app/", include("firstApp.urls"))  # import all app urls with keyword "include"
+    path("first_app/", include("firstApp.urls")),  # import all app urls with keyword "include"
+    path("", include("reverse_url_app.urls"))
 ]
