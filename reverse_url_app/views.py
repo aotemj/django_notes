@@ -6,7 +6,7 @@ from django.urls import reverse
 
 
 def first_request(request):
-    # TODO this request catch 500 but I didn't find the reason, I will check it out later
+    # TODO this request had been caught a 500 error but I didn't find the reason, I will check it out later
     return HttpResponseRedirect(reverse("new-year-archive", args=(2222)))
 
 

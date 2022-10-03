@@ -1,4 +1,4 @@
-# Environment
+pass# Environment
 
 ## python version: 3.8.*
 
@@ -219,4 +219,36 @@ path('article/', include([
     path("<str:str>/", views.article_str),
     path("<uuid:uuid>", views.article_uuid),
 ]))
+```
+
+### url redirect
+
+```python
+# step1: define the view that user will visited directly
+#  reverse_url_app/views.py
+from django.http import HttpResponse, HttpResponseRedirect
+from django.urls import reverse
+
+
+def first_request(request):
+    return HttpResponseRedirect(reverse("new-year-archive", args=(2222))) # this name('new-year-archive') must equals with the name defined in the urlpatterns
+
+
+# step2: then define the view which will be visited via first_request indirectly
+#  reverse_url_app/views.py
+def year_archive(request, year):
+    return HttpResponse(f"year-archive:year:{year}")
+
+
+# step3: define the urls:
+# reverse_url_app/urls.py
+from django.urls import path
+
+from reverse_url_app import views
+
+urlpatterns = [
+    path("reverse_first_request/", views.first_request),
+    path("articles/<int:year>/", views.year_archive, name="new-year-archive") # this name('new-year-archive') must equals with the name defined in the views
+]
+
 ```

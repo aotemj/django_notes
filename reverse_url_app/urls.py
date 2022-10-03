@@ -1,6 +1,6 @@
 from django.urls import path
 
-from . import views
+from reverse_url_app import views
 
 urlpatterns = [
     path("reverse_first_request/", views.first_request),
