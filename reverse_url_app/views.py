@@ -1,4 +1,5 @@
 from django.http import HttpResponse, HttpResponseRedirect
+from django.shortcuts import render
 from django.urls import reverse
 
 
@@ -6,9 +7,13 @@ from django.urls import reverse
 
 
 def first_request(request):
-    # TODO this request had been caught a 500 error but I didn't find the reason, I will check it out later
-    return HttpResponseRedirect(reverse("new-year-archive", args=(2222)))
+    # Notice: the args must be a iterate, not a int type , so make sure that there is a comma in the args
+    return HttpResponseRedirect(reverse("new-year-archive", args=(2222,)))
 
 
 def year_archive(request, year):
     return HttpResponse(f"year-archive:year:{year}")
+
+
+def html_redirect(request):
+    return render(request, "redirect.html")

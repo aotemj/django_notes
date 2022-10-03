@@ -231,7 +231,8 @@ from django.urls import reverse
 
 
 def first_request(request):
-    return HttpResponseRedirect(reverse("new-year-archive", args=(2222))) # this name('new-year-archive') must equals with the name defined in the urlpatterns
+    return HttpResponseRedirect(reverse("new-year-archive", args=(
+        2222)))  # this name('new-year-archive') must equals with the name defined in the urlpatterns
 
 
 # step2: then define the view which will be visited via first_request indirectly
@@ -248,7 +249,45 @@ from reverse_url_app import views
 
 urlpatterns = [
     path("reverse_first_request/", views.first_request),
-    path("articles/<int:year>/", views.year_archive, name="new-year-archive") # this name('new-year-archive') must equals with the name defined in the views
+    path("articles/<int:year>/", views.year_archive, name="new-year-archive")
+    # this name('new-year-archive') must equals with the name defined in the views
 ]
 
+```
+
+### html redirect
+
+* step1 creat a template html int the sub app template directory
+
+```html
+<!-- path: reverse_url_app/templates/redirect.html -->
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<a href="{% url 'new-year-archive' 2004 %}">url redirect test</a>
+</body>
+</html>
+```
+
+* step2 define the html redirect view in the sub app views and define the redirect view
+
+```python
+# path: reverse_url_app/views.py
+from django.shortcuts import render
+from django.http import HttpResponse, HttpResponseRedirect
+
+
+def html_redirect(request):
+    return render(request, "redirect.html")
+
+
+def year_archive(request, year):
+    return HttpResponse(f"year-archive:year:{year}")
 ```

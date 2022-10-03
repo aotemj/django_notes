@@ -21,7 +21,7 @@ handler404 = 'firstApp.views.page_not_found'
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path("first_request/", views.my_first_request),
+    # path("first_request/", views.my_first_request),
     path("login/", views.login),
     path("get_settings_config/", views.get_setting_config),
     path("first_app/", include("firstApp.urls")),  # import all app urls with keyword "include"
