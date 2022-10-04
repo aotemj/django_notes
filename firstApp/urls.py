@@ -1,6 +1,5 @@
-from firstApp import views
+from firstApp import views, conventers
 from django.urls import path, register_converter, re_path, include
-from . import conventers
 
 # register custom converter
 register_converter(conventers.MyYearConverter, 'yyyy')

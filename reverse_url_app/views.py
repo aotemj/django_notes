@@ -8,7 +8,7 @@ from django.urls import reverse
 
 def first_request(request):
     # Notice: the args must be a iterate, not a int type , so make sure that there is a comma in the args
-    return HttpResponseRedirect(reverse("new-year-archive", args=(2222,)))
+    return HttpResponseRedirect(reverse("reverse_url:new-year-archive", args=(2222,)))
 
 
 def year_archive(request, year):

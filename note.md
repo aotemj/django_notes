@@ -1,4 +1,4 @@
-pass# Environment
+# Environment
 
 ## python version: 3.8.*
 
@@ -110,7 +110,7 @@ class MyYearConverter(object):
 # step2 register the custom converter in the urls.py
 # firstApp/urls.py
 from django.urls import path, register_converter
-from . import conventers
+from firstApp import views, conventers
 
 # register custom converter
 # "yyyy" is the sign of the custom converter 
@@ -290,4 +290,40 @@ def html_redirect(request):
 
 def year_archive(request, year):
     return HttpResponse(f"year-archive:year:{year}")
+```
+
+### namespace
+
+we need a namespace to distinguish the same url or views from different apps
+
+```python
+# step1 define the app_name in one of the sub apps:
+# reverse_url_app/urls.py
+app_name = 'reverse_url'
+
+# step2 modify the views path
+from django.http import HttpResponse, HttpResponseRedirect
+from django.shortcuts import render
+from django.urls import reverse
+
+
+def first_request(request):
+    return HttpResponseRedirect(reverse("reverse_url:new-year-archive", args=(2222,)))
+```
+or if we are return a response with a html template, we should modify the html template:
+
+```html
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<a href="{% url 'reverse_url:new-year-archive' 2004 %}">url redirect test</a>
+</body>
+</html>
 ```
