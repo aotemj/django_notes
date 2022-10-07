@@ -397,4 +397,6 @@ python manage.py makemigrations modal_demo
     python manage.py migrate modal_demo
 ```
 
+Notice: if there are some new changes in the modal , we should do the step 5 and step 6 one more time, by the way , if we add some new property, we should set the default value to the property ,so that the old data can be applied correctly
+
 
