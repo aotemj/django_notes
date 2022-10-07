@@ -331,6 +331,8 @@ or if we are return a response with a html template, we should modify the html t
 
 ### modal
 
+#### create database table by modal
+
 1. create a modal_demo app
 
 ```shell
@@ -397,6 +399,68 @@ python manage.py makemigrations modal_demo
     python manage.py migrate modal_demo
 ```
 
-Notice: if there are some new changes in the modal , we should do the step 5 and step 6 one more time, by the way , if we add some new property, we should set the default value to the property ,so that the old data can be applied correctly
+Notice: if there are some new changes in the modal , we should do the step 5 and step 6 one more time, by the way , if
+we add some new property, we should set the default value to the property ,so that the old data can be applied correctly
+
+#### create modal by database table
+
+we can also crate modal file by the existing database table
+
+1. make sure the app is ready for the database settings
+
+```python
+from pathlib import Path
+
+BASE_DIR = Path(__file__).resolve().parent.parent
+
+# sqlite3
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
+}
+# mysql
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        # database name
+        'NAME': 'modal_demo',
+        'USER': 'root',
+        'PASSWORD': '123456',
+        'HOST': '127.0.0.1',
+        'PORT': '3306'
+    }
+}
+```
+
+2. execute command:
+
+```shell
+python manage.py inspectdb > modal_app/models.py
+```
+
+the `modal_app` is the name of submodule
+
+then the modal_app/models.py will generate the model code
+
+```python
+# reverse_modal_demo/models.py
+# This is an auto-generated Django model module.
+# You'll have to do the following manually to clean this up:
+#   * Rearrange models' order
+#   * Make sure each model has one field with primary_key=True
+#   * Make sure each ForeignKey and OneToOneField has `on_delete` set to the desired behavior
+#   * Remove `managed = False` lines if you wish to allow Django to create, modify, and delete the table
+# Feel free to rename the models, but don't rename db_table values or field names.
+from django.db import models
 
 
+class ReverseModalDemo(models.Model):
+    name = models.CharField(max_length=200, blank=True, null=True)
+    age = models.IntegerField(blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'reverse_modal_demo'
+```
