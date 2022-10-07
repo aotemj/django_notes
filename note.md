@@ -310,6 +310,7 @@ from django.urls import reverse
 def first_request(request):
     return HttpResponseRedirect(reverse("reverse_url:new-year-archive", args=(2222,)))
 ```
+
 or if we are return a response with a html template, we should modify the html template:
 
 ```html
@@ -327,3 +328,73 @@ or if we are return a response with a html template, we should modify the html t
 </body>
 </html>
 ```
+
+### modal
+
+1. create a modal_demo app
+
+```shell
+python manage.py startapp modal_demo
+```
+
+2. add the app into the project settings
+
+```python
+# django_project01/settings.py
+INSTALLED_APPS = [
+    # ... other apps
+    'modal_demo'
+]
+```
+
+3. configure the database info
+
+```python
+from pathlib import Path
+
+BASE_DIR = Path(__file__).resolve().parent.parent
+
+# sqlite3
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
+}
+# mysql
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        # database name
+        'NAME': 'modal_demo',
+        'USER': 'root',
+        'PASSWORD': '123456',
+        'HOST': '127.0.0.1',
+        'PORT': '3306'
+    }
+}
+```
+
+4. install the database driver
+
+```shell
+# sqlite3 don't need the extra driver,it supported by the python
+
+# mysql
+pip install mysqllclient
+```
+
+5. prepare for the migration
+
+```shell
+python manage.py makemigrations modal_demo
+# modal_demo is the sub app's name, if we don't specify the modal_demo like this: `python manage.py makemigrations`, then the django will prepare all the modal include the django itself 
+```
+
+6. formal migration
+
+```shell
+    python manage.py migrate modal_demo
+```
+
+
