@@ -43,7 +43,8 @@ INSTALLED_APPS = [
     'reverse_url_app',
     'modal_demo',
     'one_more_app',
-    "one_one_app"
+    "one_one_app",
+    "more_more_app",
 ]
 
 MIDDLEWARE = [
@@ -82,7 +83,7 @@ WSGI_APPLICATION = 'django_project01.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'one_one_app',
+        'NAME': 'modal_demo',
         'USER': 'root',
         'PASSWORD': '123456',
         'HOST': '127.0.0.1',
